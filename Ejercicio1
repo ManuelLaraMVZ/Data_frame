@@ -1,0 +1,56 @@
+objeto1 <- 56
+objeto2 <- "56" # Caracter: Simbólico
+
+objeto1
+objeto2
+
+###############################
+#Vectores y dataframes
+# <- Alt+"-" o Opt+"-"
+Nombres <- c("Diego", "Maria Fernanda", "Daniel", "Manuel")
+Edad_Ch <- c("24", "25", "24", "41")
+Edad_Nu <- c(24, 25, 24, 41)
+
+Tabla <- data.frame(Nombres, Edad_Ch, Edad_Nu)
+head(Tabla)
+
+####################################
+#llamar base de datos
+
+install.packages("vroom") #Instalación de paquetes
+
+library("vroom")
+
+Genes <- vroom(file="https://raw.githubusercontent.com/ManuelLaraMVZ/Transcript-mica/refs/heads/main/Genes.csv")
+View(Genes)
+
+install.packages("dplyr")
+
+library ("dplyr")
+
+#dplyr sirve para facilitar el manejo de los datos
+
+Filtro1 <- Genes %>% #Ctr/Cmd+Shift+m, 
+  #Significa: crearemos un objeto llamado Filtro1, 
+  #a partir del objeto "Genes" 
+  #al cual le vamos a hace rlo siguiente:
+  filter(Gen== "PIF1") #A la columna "Gen" dame 
+      #la fila de todos los datos de la celda "PIF1"
+
+Filtro1  
+
+"seleccionar columnas"
+
+Seleccionar <- Genes %>% 
+  select(1,2,3,4)
+
+Seleccionar
+
+"Multiples funciones"
+
+MF <- Genes %>% 
+  select(-2:-4) %>% 
+  filter (Gen == "B-actina") %>% 
+  mutate(Promedio = (T1+T2+T3)/3)#generar nuevas columnas y se pueden utilizar formulas
+
+MF
